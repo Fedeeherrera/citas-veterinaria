@@ -1,17 +1,47 @@
 import { useState, useEffect } from "react";
+import Error from "./Error";
 
-const Formulario = () => {
-  const [nombre, setNombre] = useState(' ');
-  const [propietario, setPropietario] = useState(' ');
-  const [email, setEmail] = useState(' ');
-  const [alta, setAlta] = useState(' ');
-  const [sintomas, setSintomas] = useState(' ');
+const Formulario = ({ pacientes, setPacientes }) => {
+  const [nombre, setNombre] = useState(" ");
+  const [propietario, setPropietario] = useState(" ");
+  const [email, setEmail] = useState(" ");
+  const [alta, setAlta] = useState(" ");
+  const [sintomas, setSintomas] = useState(" ");
 
+  const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Enviando form...");
-  }
+    if (
+      nombre.trim() === "" ||
+      propietario.trim() === "" ||
+      email.trim() === "" ||
+      alta.trim() === "" ||
+      sintomas.trim() === ""
+    ) {
+      console.log(`Hay al menos 1 campo vacio`);
+      setError(true);
+      return;
+    }
+    setError(false);
+
+    const objetoPaciente = {
+      nombre,
+      propietario,
+      email,
+      alta,
+      sintomas,
+    };
+
+    setPacientes([...pacientes, objetoPaciente]);
+
+    //Reiniciar formulario
+    setNombre("");
+    setPropietario("");
+    setEmail("");
+    setAlta("");
+    setSintomas("");
+  };
 
   return (
     <div className="md:w-1/2 lg:w-2/5 mx-5">
@@ -22,14 +52,18 @@ const Formulario = () => {
         <span className="text-indigo-600 font-bold"> Administralos</span>
       </p>
 
-      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg py-10 px-5 mb-10" >
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
+      >
+        {error && <Error mensaje="Todos los campos son obligatorios" />}
+
         <div className="mb-5">
           <label
             htmlFor="mascota"
             className="block text-gray-700 uppercase font-bold"
-  
           >
-            Nombre Mascota: 
+            Nombre Mascota:
           </label>
           <input
             id="mascota"
