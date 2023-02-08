@@ -1,32 +1,41 @@
-const Pacientes = () => {
+const Pacientes = ({paciente}) => {
+
+  const {nombre, propietario, email, alta, sintomas} = paciente
+
   return (
     <>
       <div className="mx-5 bg-white shadow-md px-5 py-10 rounded-xl">
         <p className="font-bold mb-3 text-gray-700 uppercase">
           {" "}
-          Nombre: <span className="font-normal normal-case">Hook</span>
+          Nombre: <span className="font-normal normal-case">{nombre}</span>
         </p>
         <p className="font-bold mb-3 text-gray-700 uppercase">
           {" "}
           Propietario:{" "}
-          <span className="font-normal normal-case">Federico Herrera</span>
+          <span className="font-normal normal-case">{propietario}</span>
         </p>
         <p className="font-bold mb-3 text-gray-700 uppercase">
           {" "}
           Email:{" "}
           <span className="font-normal normal-case">
-            Fedeeherrera7@gmail.com
+          {email}
           </span>
         </p>
         <p className="font-bold mb-3 text-gray-700 uppercase">
           {" "}
           Fecha Alta:{" "}
-          <span className="font-normal normal-case">18/12/2022</span>
+          <span className="font-normal normal-case">{alta}</span>
         </p>
         <p className="font-bold mb-3 text-gray-700 uppercase">
           {" "}
-          Sintomas: <span className="font-normal normal-case">Fiebre</span>
+          Sintomas: <span className="font-normal normal-case">{sintomas}</span>
         </p>
+
+          <div className="flex justify-between">
+            <button className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg" type="button"> Editar </button>
+            <button className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-lg" type="button"> Eliminar </button>
+          </div>
+
       </div>
     </>
   );
