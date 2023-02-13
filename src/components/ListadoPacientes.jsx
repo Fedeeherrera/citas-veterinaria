@@ -1,6 +1,13 @@
 import Pacientes from "./Pacientes";
+import { useEffect } from "react";
 
-const ListadoPacientes = ({ pacientes }) => {
+const ListadoPacientes = ({ pacientes, setPaciente, eliminarPaciente }) => {
+  useEffect(() => {
+    if (pacientes.length > 0) {
+      console.log("Nuevo paciente agregado");
+    }
+  }, [pacientes]);
+
   return (
     <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
       {pacientes && pacientes.length ? (
@@ -14,7 +21,14 @@ const ListadoPacientes = ({ pacientes }) => {
             </span>
           </p>
           {pacientes.map((paciente) => {
-            return <Pacientes key={paciente.id} paciente={paciente} />;
+            return (
+              <Pacientes
+                key={paciente.id}
+                paciente={paciente}
+                setPaciente={setPaciente}
+                eliminarPaciente = {eliminarPaciente}
+              />
+            );
           })}
         </>
       ) : (

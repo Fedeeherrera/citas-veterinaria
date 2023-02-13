@@ -1,6 +1,10 @@
-const Pacientes = ({paciente}) => {
+const Pacientes = ({ paciente, setPaciente, eliminarPaciente }) => {
+  const { nombre, propietario, email, alta, sintomas, id } = paciente;
+  const handleEliminar = (() => {
+    const respuesta = confirm("Esta seguro que desea eliminar?")
+    if (respuesta) {eliminarPaciente(id)} 
+  })
 
-  const {nombre, propietario, email, alta, sintomas} = paciente
 
   return (
     <>
@@ -16,26 +20,34 @@ const Pacientes = ({paciente}) => {
         </p>
         <p className="font-bold mb-3 text-gray-700 uppercase">
           {" "}
-          Email:{" "}
-          <span className="font-normal normal-case">
-          {email}
-          </span>
+          Email: <span className="font-normal normal-case">{email}</span>
         </p>
         <p className="font-bold mb-3 text-gray-700 uppercase">
           {" "}
-          Fecha Alta:{" "}
-          <span className="font-normal normal-case">{alta}</span>
+          Fecha Alta: <span className="font-normal normal-case">{alta}</span>
         </p>
         <p className="font-bold mb-3 text-gray-700 uppercase">
           {" "}
           Sintomas: <span className="font-normal normal-case">{sintomas}</span>
         </p>
 
-          <div className="flex justify-between">
-            <button className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg" type="button"> Editar </button>
-            <button className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-lg" type="button"> Eliminar </button>
-          </div>
-
+        <div className="flex justify-between">
+          <button
+            className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg"
+            type="button"
+            onClick={() => setPaciente(paciente)}
+          >
+            {" "}
+            Editar{" "}
+          </button>
+          <button
+            className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-lg"
+            type="button" onClick = {handleEliminar}
+          >
+            {" "}
+            Eliminar{" "}
+          </button>
+        </div>
       </div>
     </>
   );
